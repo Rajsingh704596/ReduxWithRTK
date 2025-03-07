@@ -25,6 +25,9 @@ const initialState ={
            }
 
 })
+
+// export {taskReducer};    //named export
+
 export default taskReducer.reducer;     //default export 
 
 // console.log(taskReducer);      //o/p-  {name: 'task', actions: {…}, caseReducers: {…}, reducer: ƒ, getInitialState: ƒ, …}

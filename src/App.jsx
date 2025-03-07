@@ -1,5 +1,6 @@
 
 import './App.css'
+import { CountRtk } from './CountRtk'
 import { TodosRtk } from './TodosRtk'
 // import { Todo } from './todo'
 
@@ -8,6 +9,8 @@ function App() {
     <>
      {/* <Todo/>     */}
      <TodosRtk/>
+     <hr />
+     <CountRtk/>
     </>
   )
 }
