@@ -1,16 +1,19 @@
 
+import ApiRTK_Todo from './ApiRTK_Todo'
 import './App.css'
-import { CountRtk } from './CountRtk'
-import { TodosRtk } from './TodosRtk'
+// import { CountRtk } from './CountRtk'
+// import { TodosRtk } from './TodosRtk'
 // import { Todo } from './todo'
 
 function App() {
   return (
     <>
      {/* <Todo/>     */}
-     <TodosRtk/>
+     {/* <TodosRtk/> */}
      <hr />
-     <CountRtk/>
+     {/* <CountRtk/> */}
+     <hr />
+     <ApiRTK_Todo/>
     </>
   )
 }

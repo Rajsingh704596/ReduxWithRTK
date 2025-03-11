@@ -62,6 +62,7 @@ export const Todo=()=>{
 
 
 
+//$ Both fun get from react-redux package 
 //! useSelector() hook for access Redux State -
 //# use the useSelector hook to read data from the Redux store.
 //* syntax:         const count = useSelector((state)=> state.property);

@@ -20,7 +20,7 @@ const reducerFun=(state=initialState, action)=>{
         case Add_Task:
             return{
                 ...state,  
-                task:[...state.task, action.payload],     //old data update with the help of spread operator 
+                task:[...state.task, action.payload],     //old data update with the help of spread operator , we can't modify state directly
             }
 
         case Delete_Task:
@@ -49,13 +49,21 @@ export const store= createStore(reducerFun, composeWithDevTools(applyMiddleware(
 console.log(store)                   //o/p- {dispatch:f, subscribe:f, getState:f, replaceReducer:f, @@observable:f}
 
 
+//# Subscribe to listen store changes (track state change)
+store.subscribe(() => {
+    const updatedState = store.getState();
+    console.log("Updated State:", updatedState);
+  });
+
+
 //# step 3: getState use
+
 const state = store.getState();
 console.log( "initial state", state);   //log the initial state   //o/p- initial state: {task: Array(0)}
 
 
 //# step 4: dispatch method use to send action (Add or Delete a task) to reducer fun.
-store.dispatch({ type: Add_Task, payload:"buy mango" });
+store.dispatch({ type: Add_Task, payload:"buy mango" });                       // here action pass which is pure js obj
 console.log("updated state", state);
 
 store.dispatch({ type: Add_Task, payload:"buy apple" });
@@ -98,11 +106,15 @@ export const fetchTask=()=>{
 
 
 
+//! Redux - state management js library .Redux help to achieve immutability of object and prevent of prop drilling & direct access (every react component(parent,child) get data from centralize store using useSelector , and update data using useDispatch [note both part of react-redux]), using Devtool debugging also easy. 
+//^ (here only one single store exist which take all react application in object form. when we need to updata the data ,we create reducer fun where main update logic exist, dispatch method used to invoke call reducer fun and pass action obj. , so that value is update based on action.type)
+//* Redux data store in heap memory 
+
 //todo-  npm i redux     (package install for use Redux property)
 
 //! 1. Reducer function-
 // #  A reducer is a fun that decides how the state should change based on the action. The reducer takes "the current state and an action" and returns a new state.
-//^ key point--    1)Reducer must always new state.        2) They should never modify the old state directly.
+//^ key point--    1)Reducer must always return new state.        2) They should never modify the old state directly.
 
 //* syntax-   const ACTION_TYPE: 'task/add'
 //*           function reducer( state = initialState, action){
@@ -114,7 +126,7 @@ export const fetchTask=()=>{
 
 //! Redux Store- 
 //# The store is where Redux keeps all our app data. It's like a database for our app, but it's only for managing data in memory ( not saving it permanently ).
-//* syntax:   const store = createStore(reducer);
+//* syntax:   const store = createStore(reducer, persist state, enhancers(Middleware) );
 //# The createStore method-- creates the Redux store using a reducer function that handles how the state changes in response to actions.
 
 
@@ -130,10 +142,11 @@ export const fetchTask=()=>{
 
 
 //! 5. Redux Action-
-//# An action is an object that tells Redux what we want to do. 
+//# An action is an pure javascript object that tells Redux what we want to do. 
 //# It must have a type property that describes the action.      
 //  {type:'Action_Type', payload:someData}
-//! 5-a. Action Creator-
+
+//! 6. Action Creator-
 //# Action Creator is not part of redux. it is convention for making redux code more better
 //# An action creator is a function that creates an action object.
 //# This makes it easier to create actions with different data.
@@ -156,4 +169,16 @@ export const fetchTask=()=>{
  
 //$ step-1  npm i redux-thunk   (package install)
 //$ step-2 export const store= createStore(reducerFun, composeWithDevTools( applyMiddleware (thunk) ));      
+
+
+
+
+//? Listening the store
+//! Track State Changes:
+//# store.subscribe() is a Redux method that allows you to listen for changes in the Redux store.
+//# It takes a callback function that gets triggered every time the store's state is updated (i.e., when an action is dispatched and the state changes).
+
+//! Manual State Monitoring:
+//# It is useful for manually tracking state changes, especially in non-React environments or for debugging purposes.
+//# However, in React applications, it is more common to use react-redux library with hooks like useSelector (to access state) and useDispatch (to dispatch actions) instead of manually subscribing to the store.
 
