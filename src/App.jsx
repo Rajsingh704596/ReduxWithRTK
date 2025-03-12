@@ -1,9 +1,10 @@
 
-import ApiRTK_Todo from './ApiRTK_Todo'
+
 import './App.css'
 // import { CountRtk } from './CountRtk'
 // import { TodosRtk } from './TodosRtk'
 // import { Todo } from './todo'
+import ApiRTK_Todo from './RTK_(ReduxToolKit)/RTK_Query/Component/ApiRTK_Todo'
 
 function App() {
   return (
